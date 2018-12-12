@@ -11,6 +11,10 @@ user_agent = 'Downvoted comment editor (by /u/impshum)'
 test_mode = 1
 loop = 1
 limit = 100
+downvotes = 0
+sleep_timer = 86400
+verbose = 1
+edits = "**/s**"
 
 reddit = praw.Reddit(client_id=client_id,
                      client_secret=client_secret,
@@ -22,9 +26,10 @@ c = 0
 while x:
     for comment in reddit.redditor(reddit_user).comments.new(limit=limit):
         if not comment.saved and comment.downs > 0:
-            print('{}: https://reddit.com{}'.format(comment.downs, comment.permalink))
+            if verbose:
+                print('{}: https://reddit.com{}'.format(comment.downs, comment.permalink))
             if not test_mode:
-                new = '{} **/s**'.format(comment.body)
+                new = '{} {}'.format(comment.body, edits)
                 comment.edit(new)
                 comment.save()
                 c += 1
@@ -33,4 +38,4 @@ while x:
         x = 0
     else:
         print('Sleeping')
-        sleep(86400)
+        sleep(sleep_timer)
