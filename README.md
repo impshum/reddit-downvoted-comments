@@ -13,7 +13,7 @@ Python bot to edit comments on Reddit which have been downvoted.
 - Choose options (0 = off / 1 = on)
 - Downvotes option is more than
 - Sleep timer option is in seconds (86400 = 1 day)
-- Edits text is appended to the original comment
+- Edited text is appended to the original comment
 
 ### Run it
 
